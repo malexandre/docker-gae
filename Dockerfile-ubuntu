@@ -1,0 +1,18 @@
+FROM ubuntu
+
+RUN apt-get update
+RUN apt-get install wget python python-pip libssl-dev python-dev libffi-dev build-essential -y
+RUN apt-get clean
+
+RUN pip install pycrypto
+
+RUN wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz --no-check-certificate
+RUN tar zxvf google-cloud-sdk.tar.gz
+RUN rm google-cloud-sdk.tar.gz
+RUN ./google-cloud-sdk/install.sh --usage-reporting=true --path-update=true
+ENV PATH /google-cloud-sdk/bin:/google-cloud-sdk/platform/google_appengine/:$PATH
+RUN yes | gcloud components update
+RUN yes | gcloud components install app-engine-go app-engine-python
+
+WORKDIR /code
+ADD . /code
