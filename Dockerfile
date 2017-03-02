@@ -15,6 +15,7 @@ ENV PATH /google-cloud-sdk/bin:/google-cloud-sdk/platform/google_appengine/:$PAT
 ENV APPENGINE /google-cloud-sdk/platform/google_appengine/
 ENV GOPATH /code/golibs
 RUN yes | gcloud components update
+RUN yes | gcloud components install app-engine-go
 
 RUN apk del wget py-pip
 RUN mkdir -p /code/golibs
