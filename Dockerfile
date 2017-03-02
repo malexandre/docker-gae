@@ -1,4 +1,5 @@
 FROM alpine
+LABEL maintainer "marc@malexandre.fr"
 
 RUN apk update
 RUN apk add wget bash python openssl-dev python-dev libffi-dev build-base
@@ -18,6 +19,8 @@ RUN yes | gcloud components install app-engine-go app-engine-python
 RUN wget https://gist.githubusercontent.com/malexandre/d7d89ef69be325e15eb54fe3aecb45bd/raw/85c31dffc86b48707e78a0c0b7045d072971f594/update_socket.py --no-check-certificate
 RUN python update_socket.py
 RUN rm update_socket.py
+
+RUN apk del wget
 
 WORKDIR /code
 ADD . /code
