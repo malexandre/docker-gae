@@ -14,6 +14,7 @@ RUN wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz --no-
     && ./google-cloud-sdk/install.sh --usage-reporting=true --path-update=true
 ENV PATH /google-cloud-sdk/bin:/google-cloud-sdk/platform/google_appengine/:$PATH
 ENV APPENGINE /google-cloud-sdk/platform/google_appengine/
+ENV GOPATH /code/golibs
 RUN yes | gcloud components update
 RUN yes | gcloud components install app-engine-go app-engine-python
 
@@ -22,6 +23,7 @@ RUN python update_socket.py
 RUN rm update_socket.py
 
 RUN apk del wget
+RUN mkdir -p /code/golibs
 
 WORKDIR /code
 ADD . /code
