@@ -13,6 +13,7 @@ RUN wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz --no-
     && rm google-cloud-sdk.tar.gz \
     && ./google-cloud-sdk/install.sh --usage-reporting=true --path-update=true
 ENV PATH /google-cloud-sdk/bin:/google-cloud-sdk/platform/google_appengine/:$PATH
+ENV APPENGINE /google-cloud-sdk/platform/google_appengine/
 RUN yes | gcloud components update
 RUN yes | gcloud components install app-engine-go app-engine-python
 
