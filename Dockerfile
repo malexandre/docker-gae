@@ -2,7 +2,7 @@ FROM alpine
 LABEL maintainer "marc@malexandre.fr"
 
 RUN apk update
-RUN apk add wget bash python openssl-dev python-dev libffi-dev build-base
+RUN apk add wget python openssl-dev python-dev libffi-dev build-base
 RUN rm -rf /var/cache/apk/*
 
 RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate && python get-pip.py && rm get-pip.py
@@ -23,6 +23,7 @@ RUN python update_socket.py
 RUN rm update_socket.py
 
 RUN apk del wget
+RUN pip uninstall --yes pip setuptools
 RUN mkdir -p /code/golibs
 
 WORKDIR /code
