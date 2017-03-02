@@ -27,4 +27,3 @@ RUN pip uninstall --yes pip setuptools
 RUN mkdir -p /code/golibs
 
 WORKDIR /code
-ADD . /code
